@@ -2,7 +2,6 @@ package array;
 
 import java.util.HashMap;
 import java.util.Map;
-
 /**
  * Created by xinyuan on 2017/6/22.
  */
@@ -52,16 +51,54 @@ public class SimpleArrayProblem {
         return null;
 
     }
+    /**mergeTwoSortedArray_1: merge后的存入新的数组中*/
+    public static int[] mergeTwoSortedArray_1(int nums1[], int nums2[]){
+        int len1 = nums1.length;
+        int len2 = nums2.length;
+        int[] nums3 = new int[len1 + len2];
+        int i = 0, j = 0, k = 0;
+        while (i < len1 && j < len2){
+//            if(nums1[i] < nums2[j]){
+//                nums3[k++] = nums1[i];
+//                i++;
+//            }else {
+//                nums3[k++] = nums2[j];
+//                j++;
+//            }
+            nums3[k++] = nums1[i] < nums2[j] ? nums1[i++] : nums2[j++];
+        }
+        if(i == len1){
+            while (j < len2){
+                nums3[k++] = nums2[j++];
+            }
+        }
+        if(j == len2){
+            while (i < len1){
+                nums3[k++] = nums1[i++];
+            }
+        }
+        return nums3;
+    }
 
     /**remove zeros*/
+    /**mergeTwoSortedArray*/
+    /**有序数组中插入元素使数组保持有序*/
 
+    public static void printArray(int[] nums){
+        for(int num: nums){
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
 
     public static void main(String[] args){
-        int[] numbers = new int[]{2,3,5,7,9};
-        int target = 9;
-        (new SimpleArrayProblem()).twoSumDoubleCycle(numbers, target);
-        (new SimpleArrayProblem()).twoSumHashMap(numbers, target);
-
-
+//        int[] numbers = new int[]{2,3,5,7,9};
+//        int target = 9;
+//        (new SimpleArrayProblem()).twoSumDoubleCycle(numbers, target);
+//        (new SimpleArrayProblem()).twoSumHashMap(numbers, target);
+        int[] nums1 = new int[]{1,2,5};
+        int[] nums2 = new int[]{2,4};
+        int[] nums3 = mergeTwoSortedArray_1(nums1, nums2);
+        printArray(nums3);
     }
 }

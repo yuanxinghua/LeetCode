@@ -6,11 +6,45 @@ package array;
 public class MediumArray {
     public static void main(String[] args){
 
-        int[] nums = new int[]{1,3};
-        nextPermutation(nums);
-        for(int i = 0; i < nums.length; i++){
-            System.out.println(nums[i]);
+        int[] nums = new int[]{7,8,1,2,3};
+        System.out.print(searchInRotatedSortedArray(nums,8));
+//        for(int i = 0; i < nums.length; i++){
+//            System.out.println(nums[i]);
+//        }
+    }
+    public static int searchInRotatedSortedArray(int[] nums, int t){
+        if(nums == null) return -1;
+        int low = 0;
+        int high = nums.length - 1;
+        while(low <= high){
+            int mid = (low + high)/2;
+            if(nums[mid] == t){
+                return mid;
+            }
+            else if(nums[mid] < t){
+                if(nums[mid] < nums[low]){
+                    high = mid - 1;
+                }else{
+                    if(t < nums[low]){
+                        low = mid + 1;
+                    }else{
+                        high = mid - 1;
+                    }
+                }
+
+            }else{
+                if(nums[mid] > nums[low]){
+                    low = mid + 1;
+                }else{
+                    if(t >= nums[low]){
+                        high = mid - 1;
+                    }else{
+                        low = mid + 1;
+                    }
+                }
+            }
         }
+        return -1;
     }
     public static void nextPermutation(int[] nums){
         int p = nums.length - 1;
